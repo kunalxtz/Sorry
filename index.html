@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>I’m Sorry Manyaa💜</title>
+
+<!-- BOOK STYLE GOOGLE FONTS -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --lavender:#cdb4db;
+    --pink:#ffc8dd;
+    --deep:#6d597a;
+}
+
+*{ box-sizing:border-box; }
+
+body{
+    margin:0;
+    font-family:'Libre Baskerville', serif;
+    background: linear-gradient(135deg, var(--lavender), var(--pink));
+    color:var(--deep);
+    min-height:100vh;
+    overflow-x:hidden;
+    text-align:center;
+}
+
+/* floating petals */
+.petal{
+    position:fixed;
+    top:-20px;
+    font-size:18px;
+    opacity:0.7;
+    animation:fall 8s linear infinite;
+}
+@keyframes fall{
+    to{ transform:translateY(120vh) rotate(360deg); opacity:0; }
+}
+
+header{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+h1{
+    font-family:'Cormorant Garamond', serif;
+    font-size:3.8rem;
+    font-weight:600;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    font-style:italic;
+    opacity:0.9;
+}
+
+.card{
+    background:rgba(255,255,255,0.9);
+    max-width:800px;
+    margin:60px auto;
+    padding:55px 40px;
+    border-radius:30px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.card h2{
+    font-family:'Cormorant Garamond', serif;
+    font-size:2.6rem;
+    margin-bottom:25px;
+}
+
+.poem{
+    white-space:pre-line;
+    font-size:1.05rem;
+    line-height:2;
+}
+
+.btn{
+    margin-top:35px;
+    padding:14px 42px;
+    font-family:'Libre Baskerville', serif;
+    font-size:0.95rem;
+    border:none;
+    border-radius:50px;
+    background:var(--deep);
+    color:white;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+    background:#5a4a68;
+}
+
+footer{
+    padding:30px;
+    opacity:0.7;
+    font-size:0.85rem;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<header>
+    <h1>I’m Sorry 💜</h1>
+    <p class="subtitle">Not loudly. Not dramatically. Just honestly.</p>
+</header>
+
+<section class="card">
+    <h2>For You 🌷</h2>
+    <p class="poem" id="text"></p>
+    <button class="btn">🤍</button>
+</section>
+
+<footer>
+    Made gently, with respect & care 🌸
+</footer>
+
+<script>
+/* apology text */
+const apology = `I know I teased you,
+and I know it crossed a line.
+
+Not because you are weak,
+but because you feel deeply —
+and that’s something I admire, not joke about.
+
+You carry music in your voice,
+stories in your soul,
+strings of a guitar in your fingers,
+and worlds inside the books you read.
+
+Someone like you
+deserves softness,
+not careless words.
+
+So this isn’t a dramatic sorry.
+It’s a quiet one.
+The kind meant for people
+who matter.
+
+If my words hurt you,
+I truly regret them.
+
+And if you’re still upset,
+I’ll wait —
+because understanding you
+matters more than being right.`;
+
+/* typewriter */
+let i=0;
+function typeText(){
+    if(i < apology.length){
+        document.getElementById("text").innerHTML += apology.charAt(i);
+        i++;
+        setTimeout(typeText,35);
+    }
+}
+typeText();
+
+/* 🎵 Auto-play music (desktop) + first interaction fallback (mobile) */
+const music = document.getElementById("bgMusic");
+music.volume = 0.4;
+
+// try autoplay on load
+window.addEventListener("load", () => {
+    music.play().catch(() => {});
+});
+
+// fallback: first tap anywhere
+document.addEventListener("click", () => {
+    if(music.paused){
+        music.play();
+    }
+}, { once:true });
+
+/* falling petals */
+setInterval(()=>{
+    const petal = document.createElement("div");
+    petal.className="petal";
+    petal.innerHTML="🌸";
+    petal.style.left=Math.random()*100+"vw";
+    petal.style.animationDuration=(6+Math.random()*4)+"s";
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(),10000);
+},400);
+</script>
+
+</body>
+</html>
