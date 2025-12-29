@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>I’m Sorry Manyaa💜</title>
+<title>I’m Sorry 💜</title>
 
 <!-- BOOK STYLE GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet">
@@ -81,22 +81,27 @@ h1{
     line-height:2;
 }
 
-.btn{
+/* 💗 CLICK BUTTON */
+.play-btn{
     margin-top:35px;
-    padding:14px 42px;
-    font-family:'Libre Baskerville', serif;
-    font-size:0.95rem;
+    padding:14px 44px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:1.15rem;
+    font-style:italic;
     border:none;
     border-radius:50px;
-    background:var(--deep);
-    color:white;
+    background:#f3a6c8;
+    color:#6d597a;
     cursor:pointer;
     transition:0.3s;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
 }
 
-.btn:hover{
+.play-btn:hover{
     transform:translateY(-3px);
-    background:#5a4a68;
+    background:#f1b3cf;
 }
 
 footer{
@@ -122,7 +127,11 @@ footer{
 <section class="card">
     <h2>For You 🌷</h2>
     <p class="poem" id="text"></p>
-    <button class="btn">🤍</button>
+
+    <!-- CLICK BUTTON -->
+    <button class="play-btn" onclick="playMusic()">
+        Click <span style="color:#ff4d88;">💗</span>
+    </button>
 </section>
 
 <footer>
@@ -161,7 +170,7 @@ because understanding you
 matters more than being right.`;
 
 /* typewriter */
-let i=0;
+let i = 0;
 function typeText(){
     if(i < apology.length){
         document.getElementById("text").innerHTML += apology.charAt(i);
@@ -171,21 +180,12 @@ function typeText(){
 }
 typeText();
 
-/* 🎵 Auto-play music (desktop) + first interaction fallback (mobile) */
-const music = document.getElementById("bgMusic");
-music.volume = 0.4;
-
-// try autoplay on load
-window.addEventListener("load", () => {
-    music.play().catch(() => {});
-});
-
-// fallback: first tap anywhere
-document.addEventListener("click", () => {
-    if(music.paused){
-        music.play();
-    }
-}, { once:true });
+/* play music on button click */
+function playMusic(){
+    const music = document.getElementById("bgMusic");
+    music.volume = 0.4;
+    music.play();
+}
 
 /* falling petals */
 setInterval(()=>{
